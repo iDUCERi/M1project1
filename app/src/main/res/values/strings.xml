@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">M1project</string>
+    <string name="passwords">passwords</string>
+    <string name="name">name</string>
+    <string name="email">email</string>
+    <string name="phone">phone</string>
+    <string name="sign">sign</string>
+    <string name="city">city</string>
+</resources>
