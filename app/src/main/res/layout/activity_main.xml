@@ -13,5 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="GoSignPage"
-        android:text="sign up" />
+        android:text="@string/sign_up" />
+
+    <Button
+        android:id="@+id/newButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="why"
+        android:text="new button" />
+
+    <EditText
+        android:id="@+id/newEditTextText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="test"/>
 </LinearLayout>

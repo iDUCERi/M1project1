@@ -28,4 +28,9 @@ public class MainActivity extends AppCompatActivity {
         Intent signPage= new Intent(this, MainSignPage.class);
         startActivity(signPage);
     }
+
+    public void why(View view) {
+        Intent signPage= new Intent(this, MainSignPage.class);
+        startActivity(signPage);
+    }
 }

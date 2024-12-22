@@ -38,7 +38,7 @@ public class FIreBaseHelper {
 
         Map<String,Object> userHashMaps= new HashMap<>();
         //userHashMaps.put(FireBaseHelper.UserId_key,user.getId());
-        Object FIreBaseHalper;
+        //Object FIreBaseHalper;
         userHashMaps.put(FIreBaseHelper.UserCity_key,user.getCity());
         userHashMaps.put(FIreBaseHelper.UserEmail_key,user.getEmail());
         userHashMaps.put(FIreBaseHelper.UserPass_key,user.getPassword());
@@ -81,12 +81,12 @@ public class FIreBaseHelper {
     }
 
     public static void headToFirebase (User user, Context context){
-
-        prepareData2Save(user);
+        Map<String,Object> data = prepareData2Save(user);
+        //prepareData2Save(user);
 
         db = FirebaseFirestore.getInstance();
         db.collection(User_collection)
-                .add(user)
+                .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {

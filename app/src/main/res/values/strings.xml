@@ -6,4 +6,5 @@
     <string name="phone">phone</string>
     <string name="sign">sign</string>
     <string name="city">city</string>
+    <string name="sign_up">sign up</string>
 </resources>

@@ -1,21 +1,32 @@
 package com.example.m1project;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+import static com.example.m1project.FIreBaseHelper.db;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainSignPage extends AppCompatActivity {
 
-    TextView pName,pEmail,pPhone,pPassword,pCity;
+    EditText pName,pEmail,pPhone,pPassword,pCity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +50,28 @@ public class MainSignPage extends AppCompatActivity {
     }
 
     public void SaveToFireBase(View view){
-        User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pCity.getText().toString());
-        FIreBaseHelper.headToFirebase(newUser,this);
-        //Map<String, Object> user = new HashMap<>();
-        //user.put("first", "Ada");
-        //user.put("last", "Lovelace");
-        //user.put("born", 1815);
+        //User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pCity.getText().toString());
+        //FIreBaseHelper.headToFirebase(newUser,this);
+        Map<String, Object> user = new HashMap<>();
+        user.put("first", "Ada");
+        user.put("last", "Lovelace");
+        user.put("born", 1815);
+
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
     }
 }
