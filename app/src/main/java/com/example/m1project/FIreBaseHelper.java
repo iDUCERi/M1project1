@@ -38,7 +38,7 @@ public class FIreBaseHelper {
 
         Map<String,Object> userHashMaps= new HashMap<>();
         //userHashMaps.put(FireBaseHelper.UserId_key,user.getId());
-        Object FireBaseHalper;
+        Object FIreBaseHalper;
         userHashMaps.put(FIreBaseHelper.UserCity_key,user.getCity());
         userHashMaps.put(FIreBaseHelper.UserEmail_key,user.getEmail());
         userHashMaps.put(FIreBaseHelper.UserPass_key,user.getPassword());
@@ -52,7 +52,7 @@ public class FIreBaseHelper {
 
         Map<String,Object> userHashMaps= new HashMap<>();
         //userHashMaps.put(FireBaseHalper.UserId_key,user.getId());
-        Object FireBaseHalper;
+        Object FIreBaseHalper;
         userHashMaps.put(FIreBaseHelper.UserCity_key,restaurant.getCity());
         userHashMaps.put(FIreBaseHelper.UserEmail_key,restaurant.getEmail());
         userHashMaps.put(FIreBaseHelper.UserPass_key,restaurant.getPassword());
@@ -67,7 +67,7 @@ public class FIreBaseHelper {
 
         Map<String,Object> userHashMaps= new HashMap<>();
         //userHashMaps.put(FireBaseHalper.UserId_key,user.getId());
-        Object FireBaseHalper;
+        Object FIreBaseHalper;
         userHashMaps.put(FIreBaseHelper.UserCity_key,deliver.getCity());
         userHashMaps.put(FIreBaseHelper.UserEmail_key,deliver.getEmail());
         userHashMaps.put(FIreBaseHelper.UserPass_key,deliver.getPassword());
