@@ -7,8 +7,10 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import java.util.Map;
 public class MainSignPage extends AppCompatActivity {
 
     EditText pName,pEmail,pPhone,pPassword,pCity;
+    Button b;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class MainSignPage extends AppCompatActivity {
         pPassword=findViewById(R.id.etPasswords);
         pCity=findViewById(R.id.etCity);
 
-
+        b = findViewById(R.id.btnSign);
 
     }
 
@@ -64,6 +67,7 @@ public class MainSignPage extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(view.getContext(),"banana",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -32,7 +32,7 @@ public class FIreBaseHelper {
     public static final String TransportType_key="Transport_type";
     public static final String DeliverLocation_key="Deliver_Location";
     public static final String IsDeliverAvailable="Is_Deliver_Available";
-    public static FirebaseFirestore db;
+    public static FirebaseFirestore db=FirebaseFirestore.getInstance();
 
     private static Map<String, Object> prepareData2Save(User user){
 
@@ -83,8 +83,6 @@ public class FIreBaseHelper {
     public static void headToFirebase (User user, Context context){
         Map<String,Object> data = prepareData2Save(user);
         //prepareData2Save(user);
-
-        db = FirebaseFirestore.getInstance();
         db.collection(User_collection)
                 .add(data)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
