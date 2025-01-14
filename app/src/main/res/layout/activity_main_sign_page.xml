@@ -13,16 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:hint="@string/name" />
+        android:hint="@string/name"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/email"
+        android:inputType="text"
         tools:ignore="TextFields" />
 
     <EditText
@@ -30,8 +30,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/phone"
+        android:inputType="text"
         tools:ignore="TextFields" />
 
     <EditText
@@ -39,21 +39,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:hint="@string/passwords" />
+        android:hint="@string/passwords"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/etCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:hint="@string/city" />
+        android:hint="@string/city"
+        android:inputType="text" />
+
+    <Spinner
+        android:id="@+id/userType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btnSign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:onClick="SaveToFireBase"
         android:text="@string/sign" />
+
+
 </LinearLayout>

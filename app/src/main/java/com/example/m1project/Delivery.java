@@ -5,8 +5,8 @@ import android.location.Location;
 public class Delivery extends User{
 
     private String transportType;
-    private Location location;
-    private boolean isAvailable;
+    private Location location; //live location
+    private boolean isAvailable;// breaktime
 
     public Delivery(String name, String gmail, String phone, String password, String city, String transportType, Location laction, boolean ifAvaible) {
         super(name, gmail, phone, password, city);
