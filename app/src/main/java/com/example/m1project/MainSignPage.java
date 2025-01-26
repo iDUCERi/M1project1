@@ -43,6 +43,7 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
 
     //LinearLayout msp;
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
