@@ -89,7 +89,7 @@ public class FIreBaseHelper {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        //Toast.makeText(this, "succeses", Toast.LENGTH_LONG);
+                        Toast.makeText(context, "succeses", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
