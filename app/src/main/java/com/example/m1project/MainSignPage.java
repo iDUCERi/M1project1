@@ -40,6 +40,7 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
     Spinner userType;
     ArrayList<String> data;
     ArrayAdapter<String> adapter;
+   static boolean isDeliver;
 
     //LinearLayout msp;
 
@@ -54,6 +55,8 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        isDeliver=false;
 
         pName=findViewById(R.id.etName);
         pEmail=findViewById(R.id.etEmail);
@@ -113,23 +116,37 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // אם אתה רוצה להוסיף את ה-EditText הזה למסך
+        LinearLayout layout = findViewById(R.id.main);  // ייתכן ותצטרך להוסיף LinearLayout ב-XML שלך
+        EditText transportType = new EditText(this);
 
-        if (position==1&& data.get(position).equals("Deliver"))
+        if (position==1&& data.get(position).equals("Deliver") && isDeliver==false)
         {
+            isDeliver=true;
             Toast.makeText(this,"deliver",Toast.LENGTH_LONG).show();
             // יצירת פקד EditText בזמן ריצה
-            EditText transportType = new EditText(this);
-            transportType.setHint("null");
+            //EditText transportType = new EditText(this);
+            transportType.setHint("irelevent for now");
             transportType.setTextColor(Color.BLACK);
             transportType.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             ));
 
+            layout.addView(transportType);
+
+            if (position==2&& data.get(position).equals("Restaurant"))
+            {
+                isDeliver=false;
+                if (transportType != null) {
+                    layout.removeView(transportType);
+                    transportType = null; // Reset the reference
+                }
+            }
 
             // אם אתה רוצה להוסיף את ה-EditText הזה למסך
-            LinearLayout layout = findViewById(R.id.main);  // ייתכן ותצטרך להוסיף LinearLayout ב-XML שלך
-            layout.addView(transportType);
+            //LinearLayout layout = findViewById(R.id.main);  // ייתכן ותצטרך להוסיף LinearLayout ב-XML שלך
+            //layout.addView(transportType);
 
             //transportType.setPadding();
             //transportType.isEnabled();
