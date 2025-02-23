@@ -118,7 +118,7 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
             Toast.makeText(this,"deliver",Toast.LENGTH_LONG).show();
             // יצירת פקד EditText בזמן ריצה
             EditText transportType = new EditText(this);
-            transportType.setHint("Choose account type");
+            transportType.setHint("null");
             transportType.setTextColor(Color.BLACK);
             transportType.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

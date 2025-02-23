@@ -80,7 +80,7 @@ public class FIreBaseHelper {
 
     }
 
-    public static void headToFirebase (User user, Context context){
+    public static void headToFirebase (Object object, Context context){
         Map<String,Object> data = prepareData2Save(user);
         //prepareData2Save(user);
         db.collection(User_collection)
