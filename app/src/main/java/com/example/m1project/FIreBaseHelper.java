@@ -81,7 +81,19 @@ public class FIreBaseHelper {
     }
 
     public static void headToFirebase (Object object, Context context){
-        Map<String,Object> data = prepareData2Save(user);
+        Map<String,Object> data;
+
+            User user= (User) object;
+            data=prepareData2Save(user);
+
+        if (object instanceof Restaurant){
+            Restaurant restaurant = (Restaurant) object;
+            data=prepareData2Save(restaurant);
+        }
+        if (object instanceof Delivery){
+            Delivery delivery = (Delivery) object;
+            data=prepareData2Save(delivery);
+        }
         //prepareData2Save(user);
         db.collection(User_collection)
                 .add(data)
