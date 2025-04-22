@@ -81,8 +81,12 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void SaveToFireBase(View view){
+        Log.d("pass","pass");
         User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pPasswordAgain.getText().toString(),pCity.getText().toString());
-        FIreBaseHelper.headToFirebase(newUser,this);
+        inputValidation iv = new inputValidation(pName,pEmail,pPhone,pPassword,pPasswordAgain,pCity);
+       if(iv.checkInput(this)&&iv.checkSecondPassword(this)&&iv.isValidEmail(pEmail)&&iv.isValidPhone(pPhone)) {
+           FIreBaseHelper.headToFirebase(newUser, this);
+        }
         //Map<String, Object> user = new HashMap<>();
         //user.put("first", "Ada");
         //user.put("last", "Lovelace");
