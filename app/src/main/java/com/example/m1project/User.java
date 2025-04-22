@@ -6,14 +6,16 @@ public class User {
     private String email;
     private String phone;
     private String password;
+    private String passwordAgain;
     private String city;
 
 
-    public User(String name, String email, String phone, String password, String city) {
+    public User(String name, String email, String phone, String password, String city, String passwordAgain) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
+        this.passwordAgain=passwordAgain;
         this.city = city;
     }
 
@@ -37,6 +39,11 @@ public class User {
         return city;
     }
 
+    public String getPasswordAgain()
+    {
+        return  passwordAgain;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -55,6 +62,10 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setPasswordAgain(String passwordAgain){
+        this.passwordAgain = passwordAgain;
     }
 
 }

@@ -9,8 +9,8 @@ public class Order extends User{
     private String delivery_time;
     private String order_content;
 
-    public Order(String name, String gmail, String phone, String password, String city, Time timeOrderd, String delivery_destination, String delivery_time, String order_content) {
-        super(name, gmail, phone, password, city);
+    public Order(String name, String gmail, String phone, String password, String city,String passwordAgain, Time timeOrderd, String delivery_destination, String delivery_time, String order_content) {
+        super(name, gmail, phone, password,passwordAgain, city);
         this.timeOrderd = timeOrderd;
         this.delivery_destination = delivery_destination;
         this.delivery_time = delivery_time;

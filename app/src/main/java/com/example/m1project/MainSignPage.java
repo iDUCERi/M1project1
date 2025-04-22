@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class MainSignPage extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
 
-    EditText pName,pEmail,pPhone,pPassword,pCity;
+    EditText pName,pEmail,pPhone,pPassword,pCity,pPasswordAgain;
     Button b;
 
     Spinner userType;
@@ -62,6 +62,7 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
         pEmail=findViewById(R.id.etEmail);
         pPhone=findViewById(R.id.etPhone);
         pPassword=findViewById(R.id.etPasswords);
+        pPasswordAgain=findViewById(R.id.validPassword);
         pCity=findViewById(R.id.etCity);
         //msp= findViewById(R.id.main);
 
@@ -80,7 +81,7 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void SaveToFireBase(View view){
-        User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pCity.getText().toString());
+        User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pPasswordAgain.getText().toString(),pCity.getText().toString());
         FIreBaseHelper.headToFirebase(newUser,this);
         //Map<String, Object> user = new HashMap<>();
         //user.put("first", "Ada");
