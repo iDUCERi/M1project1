@@ -80,36 +80,36 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    public void SaveToFireBase(View view){
-        Log.d("pass","pass");
-        User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pPasswordAgain.getText().toString(),pCity.getText().toString());
-        inputValidation iv = new inputValidation(pName,pEmail,pPhone,pPassword,pPasswordAgain,pCity);
-       if(iv.checkInput(this)&&iv.checkSecondPassword(this)&&iv.isValidEmail(pEmail)&&iv.isValidPhone(pPhone)) {
-           FIreBaseHelper.headToFirebase(newUser, this);
+    public void SaveToFireBase(View view) {
+        Log.d("pass", "pass");
+        String email = pEmail.getText().toString();
+        User newUser = new User(pName.getText().toString(), email, pPhone.getText().toString(), pPassword.getText().toString(), pPasswordAgain.getText().toString(), pCity.getText().toString());
+        inputValidation iv = new inputValidation(pName, pEmail, pPhone, pPassword, pPasswordAgain, pCity);
+        if (iv.checkInput(this) && iv.checkSecondPassword(this) && iv.isValidEmail(pEmail) && iv.isValidPhone(pPhone)) {
+            // Check if the account exists before proceeding
+            FIreBaseHelper.isAccountExist(email, this, new FIreBaseHelper.AccountExistListener() {
+                @Override
+                public void onAccountExistResult(boolean exists) {
+                    if (exists) {
+                        // Account already exists
+                        Toast.makeText(MainSignPage.this, "Account with this email already exists.", Toast.LENGTH_LONG).show();
+                    } else {
+                        // Account doesn't exist, proceed to save
+                        FIreBaseHelper.headToFirebase(newUser, MainSignPage.this);
+                    }
+                }
+            });
         }
-        //Map<String, Object> user = new HashMap<>();
-        //user.put("first", "Ada");
-        //user.put("last", "Lovelace");
-        //user.put("born", 1815);
-
-        //db.collection("users")
-                //.add(user)
-                //.addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    //@SuppressLint("RestrictedApi")
-                    //@Override
-                    //public void onSuccess(DocumentReference documentReference) {
-                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        //Toast.makeText(view.getContext(),"banana",Toast.LENGTH_LONG).show();
-                    //}
-                //})
-                //.addOnFailureListener(new OnFailureListener() {
-                   // @SuppressLint("RestrictedApi")
-                    //@Override
-                    //public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error adding document", e);
-                    //}
-                //});
     }
+
+    //public void SaveToFireBase(View view){
+        //Log.d("pass","pass");
+        //User newUser= new User(pName.getText().toString(),pEmail.getText().toString(),pPhone.getText().toString(),pPassword.getText().toString(),pPasswordAgain.getText().toString(),pCity.getText().toString());
+        //inputValidation iv = new inputValidation(pName,pEmail,pPhone,pPassword,pPasswordAgain,pCity);
+       //if(iv.checkInput(this)&&iv.checkSecondPassword(this)&&iv.isValidEmail(pEmail)&&iv.isValidPhone(pPhone)) {
+       //    FIreBaseHelper.headToFirebase(newUser, this);
+     //   }
+   // }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
