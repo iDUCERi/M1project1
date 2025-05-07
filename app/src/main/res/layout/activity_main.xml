@@ -16,6 +16,13 @@
         android:text="@string/sign_up" />
 
     <Button
+        android:id="@+id/LogInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToLogIn"
+        android:text="Login" />
+
+    <Button
         android:id="@+id/GetLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,4 +36,5 @@
         android:ems="10"
         android:inputType="text"
         android:hint="Enter your adress"/>
+
 </LinearLayout>

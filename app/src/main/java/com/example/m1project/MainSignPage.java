@@ -83,7 +83,7 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
     public void SaveToFireBase(View view) {
         Log.d("pass", "pass");
         String email = pEmail.getText().toString();
-        User newUser = new User(pName.getText().toString(), email, pPhone.getText().toString(), pPassword.getText().toString(), pPasswordAgain.getText().toString(), pCity.getText().toString());
+        User newUser = new User(pName.getText().toString(), email, pPhone.getText().toString(), pPassword.getText().toString(), pCity.getText().toString(), pPasswordAgain.getText().toString());
         inputValidation iv = new inputValidation(pName, pEmail, pPhone, pPassword, pPasswordAgain, pCity);
         if (iv.checkInput(this) && iv.checkSecondPassword(this) && iv.isValidEmail(pEmail) && iv.isValidPhone(pPhone)) {
             // Check if the account exists before proceeding

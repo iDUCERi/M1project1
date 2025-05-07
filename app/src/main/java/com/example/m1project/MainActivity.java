@@ -17,7 +17,7 @@ import org.checkerframework.common.subtyping.qual.Bottom;
 public class MainActivity extends AppCompatActivity {
 
     EditText newEditTextText;
-    Button bt;
+    Button bt,logBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         });
         newEditTextText=findViewById(R.id.newEditTextText);
         bt=findViewById(R.id.GetLocation);
+        logBtn=findViewById(R.id.LogInButton);
     }
 
     public void GoSignPage(View view) {
@@ -46,5 +47,10 @@ public class MainActivity extends AppCompatActivity {
         signPage.putExtra("adress",fullAdress);
         startActivity(signPage);
 
+    }
+
+    public void goToLogIn(View view) {
+        CustomAlertDialog customAlertDialog = new CustomAlertDialog(this);
+        customAlertDialog.showDialog("dQw4w9WgXcQ");
     }
 }
