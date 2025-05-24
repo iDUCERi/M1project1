@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -67,7 +68,9 @@ public class LoginDialogFragment extends DialogFragment {
         AlertDialog alertDialog = builder.create();
 
         if (alertDialog.getWindow() != null) {
-            alertDialog.getWindow().setDimAmount(0.9f);
+            // Ensure the flag is explicitly set
+            alertDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            alertDialog.getWindow().setDimAmount(0.6f); // Try 0.6f or 0.5f
         }
 
         loginButton.setOnClickListener(v -> {
