@@ -17,9 +17,9 @@
 
     <EditText
         android:id="@+id/etName"
-        android:layout_width="390dp"
-        android:layout_gravity="center"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:backgroundTint="#97B002"
         android:ems="10"
         android:hint="@string/name"
@@ -28,9 +28,9 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="390dp"
-        android:layout_gravity="center"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:backgroundTint="#97B002"
         android:ems="10"
         android:hint="@string/email"
@@ -40,7 +40,7 @@
 
     <EditText
         android:id="@+id/etPhone"
-        android:layout_width="390dp"
+        android:layout_width="352dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
@@ -52,11 +52,11 @@
 
     <EditText
         android:id="@+id/etPasswords"
-        android:layout_width="390dp"
+        android:layout_width="352dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
-        android:hint="Enter password"
+        android:hint="Password"
         android:ems="10"
         android:inputType="textPassword"
         android:textColorHint="#F2F2F2"
@@ -64,11 +64,11 @@
 
     <EditText
         android:id="@+id/validPassword"
-        android:layout_width="390dp"
+        android:layout_width="352dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
-        android:hint="Enter the password again"
+        android:hint="Verify password"
         android:ems="10"
         android:inputType="textPassword"
         android:textColorHint="#F2F2F2"
@@ -76,7 +76,7 @@
 
     <EditText
         android:id="@+id/etCity"
-        android:layout_width="390dp"
+        android:layout_width="352dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
@@ -87,7 +87,7 @@
 
     <Button
         android:id="@+id/btnSign"
-        android:layout_width="250dp"
+        android:layout_width="352dp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"

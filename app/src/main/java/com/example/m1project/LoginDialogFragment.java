@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
+import android.widget.CheckBox; // <<< Import CheckBox
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -28,13 +28,11 @@ public class LoginDialogFragment extends DialogFragment {
 
     private EditText emailInput;
     private EditText passwordInput;
+    private CheckBox rememberMeCheckbox; // <<< Add CheckBox variable
     private LoginDialogListener listener;
 
-    private CheckBox remember;
-
     public interface LoginDialogListener {
-        void onLoginSuccess(String email);
-
+        void onLoginSuccess(String email, boolean rememberMe); // <<< Modified interface
     }
 
     public static LoginDialogFragment newInstance() {
@@ -57,31 +55,30 @@ public class LoginDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.dialog_login, null); // We'll create this layout file
+        View dialogView = inflater.inflate(R.layout.dialog_login, null);
 
         emailInput = dialogView.findViewById(R.id.etDialogEmail);
         passwordInput = dialogView.findViewById(R.id.etDialogPassword);
+        rememberMeCheckbox = dialogView.findViewById(R.id.cbDialogRememberMe); // <<< Initialize CheckBox
         Button loginButton = dialogView.findViewById(R.id.btnDialogLogin);
 
         builder.setView(dialogView)
                 .setTitle("Login");
-       
+
         AlertDialog alertDialog = builder.create();
 
         if (alertDialog.getWindow() != null) {
             alertDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            alertDialog.getWindow().setDimAmount(0.6f); 
+            alertDialog.getWindow().setDimAmount(0.6f);
         }
 
         loginButton.setOnClickListener(v -> {
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
 
-            // Reset previous errors
             emailInput.setError(null);
             passwordInput.setError(null);
 
-            //Validate email format
             if (TextUtils.isEmpty(email)) {
                 emailInput.setError("Email cannot be empty");
                 return;
@@ -95,7 +92,6 @@ public class LoginDialogFragment extends DialogFragment {
                 return;
             }
 
-            // Proceed to Firebase validation
             validateCredentialsWithFirebase(email, password, alertDialog);
         });
 
@@ -103,7 +99,7 @@ public class LoginDialogFragment extends DialogFragment {
     }
 
     private void validateCredentialsWithFirebase(String email, String password, Dialog dialog) {
-        FirebaseFirestore db = FIreBaseHelper.db; // Use existing instance
+        FirebaseFirestore db = FIreBaseHelper.db;
 
         db.collection(FIreBaseHelper.User_collection)
                 .whereEqualTo(FIreBaseHelper.UserEmail_key, email)
@@ -111,15 +107,12 @@ public class LoginDialogFragment extends DialogFragment {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult().isEmpty()) {
-                            // Email does not exist
-                            emailInput.setError("Incorrect password or email");
-                            passwordInput.setError("Incorrect password or email");
+                            emailInput.setError("Account with this email does not exist");
+                            passwordInput.setError("Incorrect password");
                         } else {
-                            // Email exists, check password
                             boolean passwordMatch = false;
                             String storedPassword = "";
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                // Assuming only one user per email
                                 storedPassword = document.getString(FIreBaseHelper.UserPass_key);
                                 if (storedPassword != null && storedPassword.equals(password)) {
                                     passwordMatch = true;
@@ -128,22 +121,20 @@ public class LoginDialogFragment extends DialogFragment {
                             }
 
                             if (passwordMatch) {
-                                // Login successful
                                 Toast.makeText(getContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
                                 if (listener != null) {
-                                    listener.onLoginSuccess(email);
+                                    boolean remember = rememberMeCheckbox.isChecked(); // <<< Get CheckBox state
+                                    listener.onLoginSuccess(email, remember); // <<< Pass to listener
                                 }
                                 dialog.dismiss();
                             } else {
-                                // Password incorrect
                                 emailInput.setError("Invalid email or password");
                                 passwordInput.setError("Invalid email or password");
                             }
                         }
                     } else {
-                        // Error fetching data
                         Toast.makeText(getContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        emailInput.setError("Login failed. Try again."); // Generic error
+                        emailInput.setError("Login failed. Try again.");
                     }
                 });
     }

@@ -1,11 +1,12 @@
 package com.example.m1project;
 
 import android.content.Intent;
+import android.content.SharedPreferences; // <<< Import SharedPreferences
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView; // <<< ADDED Import for ImageView
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,15 +16,33 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
-public class MainActivity extends AppCompatActivity implements LoginDialogFragment.LoginDialogListener{
+public class MainActivity extends AppCompatActivity implements LoginDialogFragment.LoginDialogListener {
 
     EditText newEditTextText;
     Button bt, logBtn;
-    ImageView imageView4; // <<< ADDED ImageView reference
+    ImageView imageView4;
+
+    // SharedPreferences keys
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREF_REMEMBER_ME = "rememberMe";
+    private static final String PREF_USER_EMAIL = "userEmail"; // To store email if remembered
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean shouldRemember = prefs.getBoolean(PREF_REMEMBER_ME, false);
+        String rememberedEmail = prefs.getString(PREF_USER_EMAIL, null);
+
+        if (shouldRemember && rememberedEmail != null) {
+            Intent intent = new Intent(MainActivity.this, MainPage.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -35,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
         newEditTextText = findViewById(R.id.newEditTextText);
         bt = findViewById(R.id.GetLocation);
         logBtn = findViewById(R.id.LogInButton);
-        imageView4 = findViewById(R.id.imageView4); //
+        imageView4 = findViewById(R.id.imageView4);
 
 
         imageView4.setScaleX(0.01f);
@@ -51,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
                     .setStartDelay(300)
                     .start();
         });
-
     }
 
     public void GoSignPage(View view) {
@@ -73,9 +91,24 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     }
 
     @Override
-    public void onLoginSuccess(String email) {
-        Toast.makeText(this, "Login successful for: " + email + " (from Activity)", Toast.LENGTH_LONG).show();
-        // Intent test = new Intent(this, MainLogIn.class);
-        // startActivity(test);
+    public void onLoginSuccess(String email, boolean rememberMe) { // <<< Updated method signature
+        Toast.makeText(this, "Login successful for: " + email, Toast.LENGTH_LONG).show();
+
+        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+        if (rememberMe) {
+            editor.putBoolean(PREF_REMEMBER_ME, true);
+            editor.putString(PREF_USER_EMAIL, email); // Store email if remembered
+        } else {
+            // If not remember me, clear the preferences
+            editor.remove(PREF_REMEMBER_ME);
+            editor.remove(PREF_USER_EMAIL);
+        }
+        editor.apply(); // Apply changes to SharedPreferences
+
+        Intent intent = new Intent(this, MainPage.class);
+        // Optionally pass the email to MainPage if needed there
+        // intent.putExtra("USER_EMAIL", email);
+        startActivity(intent);
+        finish(); // Finish MainActivity after successful login
     }
 }
