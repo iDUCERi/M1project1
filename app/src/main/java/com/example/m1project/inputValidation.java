@@ -21,12 +21,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class inputValidation {
-    private EditText name;
-    private EditText email;
-    private EditText phone;
-    private EditText password;
-    private EditText passwordAgain;
-    private EditText city;
+    private final EditText name;
+    private final EditText email;
+    private final EditText phone;
+    private final EditText password;
+    private final EditText passwordAgain;
+    private final EditText city;
 
     private static final String TAG = "CityValidation";
     private static final String API_URL_BASE = "https://data.gov.il/api/action/datastore_search";

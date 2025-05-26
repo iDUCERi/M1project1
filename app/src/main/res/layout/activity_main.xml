@@ -26,7 +26,8 @@
 
         <Button
             android:id="@+id/LogInButton"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:backgroundTint="#97B002"
 
@@ -35,7 +36,8 @@
 
         <Button
             android:id="@+id/btnSignUp"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:backgroundTint="#97B002"
             android:onClick="GoSignPage"
@@ -43,9 +45,9 @@
 
         <Button
             android:id="@+id/GetLocation"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-
             android:backgroundTint="#97B002"
             android:onClick="why"
             android:text="Get Location" />
@@ -58,7 +60,8 @@
             android:ems="10"
             android:hint="Enter your adress"
             android:inputType="text"
-            android:textColorHint="#F2F2F2" />
+            android:textColorHint="#F2F2F2"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
 </LinearLayout>
