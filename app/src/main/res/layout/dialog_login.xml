@@ -2,27 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#0b0b0b"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/etDialogEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#97B002"
         android:hint="Enter your email"
         android:inputType="textEmailAddress"
-        android:layout_marginBottom="8dp" />
+        android:textColorHint="#F2F2F2" />
 
     <EditText
         android:id="@+id/etDialogPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#97B002"
         android:hint="Enter your password"
         android:inputType="textPassword"
-        android:layout_marginBottom="16dp" />
+        android:textColorHint="#F2F2F2" />
 
     <Button
         android:id="@+id/btnDialogLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#97B002"
         android:text="login" />
 </LinearLayout>

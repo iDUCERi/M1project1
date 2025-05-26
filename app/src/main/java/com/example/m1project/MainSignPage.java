@@ -80,26 +80,79 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+//    public void SaveToFireBase(View view) {
+//        Log.d("pass", "pass");
+//        String email = pEmail.getText().toString();
+//        User newUser = new User(pName.getText().toString(), email, pPhone.getText().toString(), pPassword.getText().toString(), pCity.getText().toString(), pPasswordAgain.getText().toString());
+//        inputValidation iv = new inputValidation(pName, pEmail, pPhone, pPassword, pPasswordAgain, pCity);
+//        if (iv.checkInput(this) && iv.checkSecondPassword(this) && iv.isValidEmail(pEmail) && iv.isValidPhone(pPhone) && iv.isValidPassword(pPassword)) {
+//            // Check if the account exists before proceeding
+//            FIreBaseHelper.isAccountExist(email, this, new FIreBaseHelper.AccountExistListener() {
+//                @Override
+//                public void onAccountExistResult(boolean exists) {
+//                    if (exists) {
+//                        // Account already exists
+//                        Toast.makeText(MainSignPage.this, "Account with this email already exists.", Toast.LENGTH_LONG).show();
+//                    } else {
+//                        // Account doesn't exist, proceed to save
+//                        FIreBaseHelper.headToFirebase(newUser, MainSignPage.this);
+//                    }
+//                }
+//            });
+//        }
+//    }
+
     public void SaveToFireBase(View view) {
-        Log.d("pass", "pass");
-        String email = pEmail.getText().toString();
-        User newUser = new User(pName.getText().toString(), email, pPhone.getText().toString(), pPassword.getText().toString(), pCity.getText().toString(), pPasswordAgain.getText().toString());
+        String email = pEmail.getText().toString().trim();
+        String name = pName.getText().toString().trim();
+        String phone = pPhone.getText().toString().trim();
+        String password = pPassword.getText().toString().trim();
+        String city = pCity.getText().toString().trim(); // Get city text
+        String passwordAgain = pPasswordAgain.getText().toString().trim();
+
+        User newUser = new User(name, email, phone, password, city, passwordAgain);
+
         inputValidation iv = new inputValidation(pName, pEmail, pPhone, pPassword, pPasswordAgain, pCity);
-        if (iv.checkInput(this) && iv.checkSecondPassword(this) && iv.isValidEmail(pEmail) && iv.isValidPhone(pPhone)) {
-            // Check if the account exists before proceeding
-            FIreBaseHelper.isAccountExist(email, this, new FIreBaseHelper.AccountExistListener() {
-                @Override
-                public void onAccountExistResult(boolean exists) {
-                    if (exists) {
-                        // Account already exists
-                        Toast.makeText(MainSignPage.this, "Account with this email already exists.", Toast.LENGTH_LONG).show();
-                    } else {
-                        // Account doesn't exist, proceed to save
-                        FIreBaseHelper.headToFirebase(newUser, MainSignPage.this);
-                    }
-                }
-            });
+
+
+        if (!iv.checkInput(this)) {
+            return;
         }
+        if (!iv.checkSecondPassword(this)) {
+            return;
+        }
+        if (!iv.isValidEmail(pEmail)) {
+            return;
+        }
+        if (!iv.isValidPhone(pPhone)) {
+            return;
+        }
+        if (!iv.isValidPassword(pPassword)) {
+            return;
+        }
+
+        iv.isValidCity(new inputValidation.CityValidationListener() {
+            @Override
+            public void onCityValidationResult(boolean isCityValid, String validatedCity, String message) {
+                if (isCityValid) {
+                    FIreBaseHelper.isAccountExist(email, MainSignPage.this, new FIreBaseHelper.AccountExistListener() {
+                        @Override
+                        public void onAccountExistResult(boolean exists) {
+                            if (exists) {
+
+                                Toast.makeText(MainSignPage.this, "Account with this email already exists.", Toast.LENGTH_LONG).show();
+                            } else {
+
+                                FIreBaseHelper.headToFirebase(newUser, MainSignPage.this);
+                            }
+                        }
+                    });
+                } else {
+                    pCity.setError(message);
+                    Toast.makeText(MainSignPage.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     //public void SaveToFireBase(View view){
@@ -121,7 +174,6 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // אם אתה רוצה להוסיף את ה-EditText הזה למסך
         LinearLayout layout = findViewById(R.id.main);  // ייתכן ותצטרך להוסיף LinearLayout ב-XML שלך
         EditText transportType = new EditText(this);
 
@@ -129,8 +181,6 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
         {
             isDeliver=true;
             Toast.makeText(this,"deliver",Toast.LENGTH_LONG).show();
-            // יצירת פקד EditText בזמן ריצה
-            //EditText transportType = new EditText(this);
             transportType.setHint("irelevent for now");
             transportType.setTextColor(Color.BLACK);
             transportType.setLayoutParams(new LinearLayout.LayoutParams(
@@ -148,13 +198,6 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
                     transportType = null; // Reset the reference
                 }
             }
-
-            // אם אתה רוצה להוסיף את ה-EditText הזה למסך
-            //LinearLayout layout = findViewById(R.id.main);  // ייתכן ותצטרך להוסיף LinearLayout ב-XML שלך
-            //layout.addView(transportType);
-
-            //transportType.setPadding();
-            //transportType.isEnabled();
         }
 
     }

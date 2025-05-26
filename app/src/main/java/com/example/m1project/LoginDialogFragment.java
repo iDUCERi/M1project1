@@ -87,7 +87,7 @@ public class LoginDialogFragment extends DialogFragment {
                 return;
             }
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                emailInput.setError("Email is not logical");
+                emailInput.setError("Invalid email");
                 return;
             }
             if (TextUtils.isEmpty(password)) {
@@ -112,8 +112,8 @@ public class LoginDialogFragment extends DialogFragment {
                     if (task.isSuccessful()) {
                         if (task.getResult().isEmpty()) {
                             // Email does not exist
-                            emailInput.setError("Invalid email or password");
-                            passwordInput.setError("Invalid email or password");
+                            emailInput.setError("Incorrect password or email");
+                            passwordInput.setError("Incorrect password or email");
                         } else {
                             // Email exists, check password
                             boolean passwordMatch = false;
