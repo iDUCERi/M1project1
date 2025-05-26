@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainSignPage extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemSelectedListener {
+public class MainSignPage extends AppCompatActivity {
 
     EditText pName,pEmail,pPhone,pPassword,pCity,pPasswordAgain;
     Button b;
@@ -67,16 +67,6 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
         //msp= findViewById(R.id.main);
 
         b = findViewById(R.id.btnSign);
-
-        userType= findViewById(R.id.userType);
-        data= new ArrayList<String>();
-            data.add("Choose account type");
-            data.add("Deliver");
-            data.add("Restaurant");
-
-        adapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, data);
-        userType.setAdapter(adapter);
-        userType.setOnItemSelectedListener(this);
 
     }
 
@@ -164,46 +154,4 @@ public class MainSignPage extends AppCompatActivity implements AdapterView.OnIte
      //   }
    // }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (position==1&& data.get(position).equals("Deliver"))
-        {
-            Toast.makeText(this,"deliver",Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        LinearLayout layout = findViewById(R.id.main);  // ייתכן ותצטרך להוסיף LinearLayout ב-XML שלך
-        EditText transportType = new EditText(this);
-
-        if (position==1&& data.get(position).equals("Deliver") && isDeliver==false)
-        {
-            isDeliver=true;
-            Toast.makeText(this,"deliver",Toast.LENGTH_LONG).show();
-            transportType.setHint("irelevent for now");
-            transportType.setTextColor(Color.BLACK);
-            transportType.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-
-            layout.addView(transportType);
-
-            if (position==2&& data.get(position).equals("Restaurant"))
-            {
-                isDeliver=false;
-                if (transportType != null) {
-                    layout.removeView(transportType);
-                    transportType = null; // Reset the reference
-                }
-            }
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

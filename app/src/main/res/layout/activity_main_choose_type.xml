@@ -9,17 +9,34 @@
     android:orientation="vertical"
     tools:context=".MainChooseType">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="152dp"
+        app:srcCompat="@drawable/fastan" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="390dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="Welcome to the FastAndEasy App!" />
+
     <Button
         android:id="@+id/button"
-        android:layout_marginLeft="20dp"
+        android:layout_width="250dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_width="370dp"
+        android:backgroundTint="#97B002"
         android:text="Button" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="370dp"
+        android:layout_width="250dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:backgroundTint="#97B002"
         android:text="Button" />
+
 </LinearLayout>

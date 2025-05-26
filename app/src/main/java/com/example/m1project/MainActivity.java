@@ -35,26 +35,23 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
         newEditTextText = findViewById(R.id.newEditTextText);
         bt = findViewById(R.id.GetLocation);
         logBtn = findViewById(R.id.LogInButton);
-        imageView4 = findViewById(R.id.imageView4); // <<< ADDED Initialize ImageView
-
-        //Animation
-        // Set initial state (very small)
-        imageView4.setScaleX(0.01f); // Start at 1% of its width
-        imageView4.setScaleY(0.01f); // Start at 1% of its height
-        imageView4.setAlpha(0f);     // Start fully transparent (optional, but good for smooth appearance)
+        imageView4 = findViewById(R.id.imageView4); //
 
 
-        // Animate to final state after the layout is established
-        imageView4.post(() -> { // Use post to ensure the view has been measured
+        imageView4.setScaleX(0.01f);
+        imageView4.setScaleY(0.01f);
+        imageView4.setAlpha(0f);
+
+        imageView4.post(() -> {
             imageView4.animate()
-                    .scaleX(1f) // Animate to 100% of its original width
-                    .scaleY(1f) // Animate to 100% of its original height
-                    .alpha(1f)  // Animate to fully opaque (optional)
-                    .setDuration(1000) // Duration of the animation in milliseconds (e.g., 1 second)
-                    .setStartDelay(300) // Optional: delay before animation starts
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .alpha(1f)
+                    .setDuration(1000)
+                    .setStartDelay(300)
                     .start();
         });
-        // --- End of Animation Logic ---
+
     }
 
     public void GoSignPage(View view) {
