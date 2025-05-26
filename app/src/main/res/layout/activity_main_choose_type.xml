@@ -17,11 +17,14 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="390dp"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:fontFamily="@font/montserr"
+        android:text="Welcome to the FastAndEasy App!"
         android:textColor="#FFFFFF"
-        android:text="Welcome to the FastAndEasy App!" />
+        android:textSize="20dp"
+        tools:ignore="HardcodedText,SpUsage" />
 
     <Button
         android:id="@+id/button"

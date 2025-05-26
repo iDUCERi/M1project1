@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#0b0b0b"
+    android:padding="24dp"
     android:orientation="vertical">
 
     <EditText
@@ -11,24 +14,39 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#97B002"
-        android:hint="Enter your email"
+        android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColorHint="#F2F2F2" />
+        android:textColorHint="#F2F2F2"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/etDialogPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#97B002"
-        android:hint="Enter your password"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#F2F2F2" />
+        android:textColorHint="#F2F2F2"
+        tools:ignore="HardcodedText" />
+
+    <CheckBox
+        android:id="@+id/cbDialogRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@null"
+        android:buttonTint="#97B002"
+        android:textColor="#FFFFFF"
+        android:text="Remember Me"
+        app:buttonIconTint="@null"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btnDialogLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
+        android:layout_marginTop="16dp"
         android:text="login" />
 </LinearLayout>
