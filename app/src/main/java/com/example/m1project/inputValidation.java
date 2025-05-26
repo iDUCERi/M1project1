@@ -94,11 +94,21 @@ public class inputValidation {
     }
 
     boolean isValidPhone(EditText phoneInput) {
-        String phoneStr = phoneInput.getText().toString();
-        if (!TextUtils.isEmpty(phoneStr) && Patterns.PHONE.matcher(phoneStr).matches()) {
+        String phoneStr = phoneInput.getText().toString().trim();
+        String israelPhoneRegex = "^0(5[0-9]{1}|[23489]{1})[ -]?[0-9]{7}$";
+
+
+        if (TextUtils.isEmpty(phoneStr)) {
+            // Caught by checkInput
+            phoneInput.setError("Phone number cannot be empty.");
+            return false;
+        }
+
+        if (phoneStr.matches(israelPhoneRegex)) {
+            phoneInput.setError(null);
             return true;
         } else {
-            phoneInput.setError("Not a valid phone number");
+            phoneInput.setError("Invalid Israeli phone number format (e.g., 05X-XXXXXXX or 0X-XXXXXXX).");
             return false;
         }
     }
@@ -236,4 +246,5 @@ public class inputValidation {
             }
         }).start();
     }
+
 }

@@ -74,6 +74,16 @@
         android:textColorHint="#F2F2F2"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="352dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="*The city name must be in Hebrew"
+        android:textSize="10dp"
+        android:textColor="#97B002"
+        tools:ignore="HardcodedText" />
+
     <EditText
         android:id="@+id/etCity"
         android:layout_width="352dp"
