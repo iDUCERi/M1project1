@@ -63,14 +63,12 @@ public class LoginDialogFragment extends DialogFragment {
 
         builder.setView(dialogView)
                 .setTitle("Login");
-        // No need for default positive/negative buttons from builder if we have one in the custom layout
-
+       
         AlertDialog alertDialog = builder.create();
 
         if (alertDialog.getWindow() != null) {
-            // Ensure the flag is explicitly set
             alertDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            alertDialog.getWindow().setDimAmount(0.6f); // Try 0.6f or 0.5f
+            alertDialog.getWindow().setDimAmount(0.6f); 
         }
 
         loginButton.setOnClickListener(v -> {
@@ -81,7 +79,7 @@ public class LoginDialogFragment extends DialogFragment {
             emailInput.setError(null);
             passwordInput.setError(null);
 
-            // 1. Validate email format
+            //Validate email format
             if (TextUtils.isEmpty(email)) {
                 emailInput.setError("Email cannot be empty");
                 return;
@@ -95,7 +93,7 @@ public class LoginDialogFragment extends DialogFragment {
                 return;
             }
 
-            // 2. Proceed to Firebase validation
+            // Proceed to Firebase validation
             validateCredentialsWithFirebase(email, password, alertDialog);
         });
 
