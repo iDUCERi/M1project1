@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -29,10 +30,11 @@ public class LoginDialogFragment extends DialogFragment {
     private EditText passwordInput;
     private LoginDialogListener listener;
 
-    // Interface for communication back to the Activity
+    private CheckBox remember;
+
     public interface LoginDialogListener {
-        void onLoginSuccess(String email); // Or pass user object if needed
-        // void onLoginFailed(); // Optional: if activity needs to know about general failure
+        void onLoginSuccess(String email);
+
     }
 
     public static LoginDialogFragment newInstance() {

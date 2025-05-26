@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
-public class MainActivity extends AppCompatActivity implements LoginDialogFragment.LoginDialogListener {
+public class MainActivity extends AppCompatActivity implements LoginDialogFragment.LoginDialogListener{
 
     EditText newEditTextText;
     Button bt, logBtn;
