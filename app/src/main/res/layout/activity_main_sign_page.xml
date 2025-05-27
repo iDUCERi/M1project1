@@ -80,7 +80,7 @@
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="*The city name must be in Hebrew"
-        android:textSize="10dp"
+        android:textSize="10sp"
         android:textColor="#97B002"
         tools:ignore="HardcodedText" />
 
@@ -95,6 +95,17 @@
         android:inputType="text"
         android:textColorHint="#F2F2F2" />
 
+    <!-- Added Spinner for Transport Type -->
+    <Spinner
+        android:id="@+id/spinnerTransportType"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#97B002"
+        android:entries="@array/transport_types" /> <!-- We'll define this array in strings.xml -->
+
+
     <Button
         android:id="@+id/btnSign"
         android:layout_width="352dp"
@@ -105,6 +116,5 @@
         android:backgroundTint="#97B002"
         android:onClick="SaveToFireBase"
         android:text="@string/sign" />
-
 
 </LinearLayout>

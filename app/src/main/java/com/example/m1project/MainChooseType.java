@@ -1,6 +1,8 @@
 package com.example.m1project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,5 +22,10 @@ public class MainChooseType extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void signAsDriver(View view) {
+        Intent intent = new Intent(this, MainSignPage.class);
+        startActivity(intent);
     }
 }

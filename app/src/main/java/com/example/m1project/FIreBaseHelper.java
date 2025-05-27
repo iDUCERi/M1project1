@@ -23,7 +23,9 @@ import java.util.Map;
 public class FIreBaseHelper {
     //dddddd77777121213
     public static final String User_collection="Users";
-    //public static final String UserId_key=" User_id";
+    public static final String Delivery_collection="DeliveryC";
+    public static final String Restaurant_collection="RestaurantC";
+
     public static final String UserName_key= "User_name";
     public static final String UserEmail_key="User_email";
     public static final String UserCity_key="User_city";
@@ -78,6 +80,7 @@ public class FIreBaseHelper {
         userHashMaps.put(FIreBaseHelper.UserPass_key,deliver.getPassword());
         userHashMaps.put(FIreBaseHelper.UserName_key,deliver.getName());
         userHashMaps.put(FIreBaseHelper.UserPhone_key,deliver.getPhone());
+
         userHashMaps.put(FIreBaseHelper.TransportType_key,deliver.getTransportType());
         userHashMaps.put(FIreBaseHelper.DeliverLocation_key,deliver.getLocation());
         userHashMaps.put(FIreBaseHelper.IsDeliverAvailable,deliver.getIsAvailable());

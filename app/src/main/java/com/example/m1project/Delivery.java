@@ -8,11 +8,11 @@ public class Delivery extends User{
     private Location location; //live location
     private boolean isAvailable;// breaktime
 
-    public Delivery(String name, String gmail, String phone, String password,String passwordAgain ,String city, String transportType, Location laction, boolean ifAvaible) {
+    public Delivery(String name, String gmail, String phone, String password,String passwordAgain ,String city, String transportType, Location location, boolean isAvailable) {
             super(name, gmail, phone, password,passwordAgain,city);
         this.transportType = transportType;
-        this.location = laction;
-        this.isAvailable = ifAvaible;
+        this.location = location;
+        this.isAvailable = isAvailable;
     }
 
     public String getTransportType() {

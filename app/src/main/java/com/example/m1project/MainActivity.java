@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     }
 
     public void GoSignPage(View view) {
-        Intent signPage = new Intent(this, MainSignPage.class);
+        Intent signPage = new Intent(this, MainChooseType.class);
         startActivity(signPage);
     }
 
