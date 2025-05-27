@@ -36,6 +36,7 @@ android {
 
 dependencies {
 
+
     implementation(libs.appcompat)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)

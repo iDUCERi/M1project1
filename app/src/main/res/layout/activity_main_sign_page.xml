@@ -17,7 +17,7 @@
 
     <EditText
         android:id="@+id/etName"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="#97B002"
@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="#97B002"
@@ -40,7 +40,7 @@
 
     <EditText
         android:id="@+id/etPhone"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
@@ -52,7 +52,7 @@
 
     <EditText
         android:id="@+id/etPasswords"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
@@ -64,7 +64,7 @@
 
     <EditText
         android:id="@+id/validPassword"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
@@ -76,7 +76,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:text="*The city name must be in Hebrew"
@@ -86,7 +86,7 @@
 
     <EditText
         android:id="@+id/etCity"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:backgroundTint="#97B002"
@@ -95,15 +95,15 @@
         android:inputType="text"
         android:textColorHint="#F2F2F2" />
 
-    <!-- Added Spinner for Transport Type -->
+
     <Spinner
         android:id="@+id/spinnerTransportType"
-        android:layout_width="352dp"
+        android:layout_width="352sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:backgroundTint="#97B002"
-        android:entries="@array/transport_types" /> <!-- We'll define this array in strings.xml -->
+        android:entries="@array/transport_types" />
 
 
     <Button

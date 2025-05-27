@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     // SharedPreferences keys
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_REMEMBER_ME = "rememberMe";
-    private static final String PREF_USER_EMAIL = "userEmail"; // To store email if remembered
+    private static final String PREF_USER_EMAIL = "userEmail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     public void GoSignPage(View view) {
         Intent signPage = new Intent(this, MainChooseType.class);
         startActivity(signPage);
+        finish();
     }
 
     public void why(View view) {
@@ -91,24 +92,22 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     }
 
     @Override
-    public void onLoginSuccess(String email, boolean rememberMe) { // <<< Updated method signature
+    public void onLoginSuccess(String email, boolean rememberMe) {
         Toast.makeText(this, "Login successful for: " + email, Toast.LENGTH_LONG).show();
 
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
         if (rememberMe) {
             editor.putBoolean(PREF_REMEMBER_ME, true);
-            editor.putString(PREF_USER_EMAIL, email); // Store email if remembered
+            editor.putString(PREF_USER_EMAIL, email);
         } else {
             // If not remember me, clear the preferences
             editor.remove(PREF_REMEMBER_ME);
             editor.remove(PREF_USER_EMAIL);
         }
-        editor.apply(); // Apply changes to SharedPreferences
+        editor.apply();
 
         Intent intent = new Intent(this, MainPage.class);
-        // Optionally pass the email to MainPage if needed there
-        // intent.putExtra("USER_EMAIL", email);
         startActivity(intent);
-        finish(); // Finish MainActivity after successful login
+        finish();
     }
 }

@@ -27,5 +27,6 @@ public class MainChooseType extends AppCompatActivity {
     public void signAsDriver(View view) {
         Intent intent = new Intent(this, MainSignPage.class);
         startActivity(intent);
+        finish();
     }
 }

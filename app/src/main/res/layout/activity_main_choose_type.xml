@@ -29,7 +29,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:text="We’re delighted to have you on board and truly appreciate your choice to use our services. At FastAndEasy, we are committed to providing fast, reliable, and top-quality delivery solutions to meet your needs. Your satisfaction is our priority, and we strive to make every order smooth, convenient, and hassle-free.
 Thank you for trusting us — we look forward to serving you!"
         android:textColor="#FFFFFF"
@@ -47,7 +47,7 @@ Thank you for trusting us — we look forward to serving you!"
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:fontFamily="@font/montserr"
         android:textColor="#97B002"
         android:text="*If you're interested in joining our platform as a food delivery partner, please select Sign Up as a Driver." />
@@ -57,7 +57,7 @@ Thank you for trusting us — we look forward to serving you!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserr"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:textColor="#97B002"
         android:text="*If you're a restaurant looking to offer your menu through our app, choose Sign Up as a Restaurant." />
 
