@@ -107,8 +107,8 @@ public class LoginDialogFragment extends DialogFragment {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         if (task.getResult().isEmpty()) {
-                            emailInput.setError("Account with this email does not exist");
-                            passwordInput.setError("Incorrect password");
+                            emailInput.setError("Incorrect password or email");
+                            passwordInput.setError("Incorrect password or email");
                         } else {
                             boolean passwordMatch = false;
                             String storedPassword = "";
