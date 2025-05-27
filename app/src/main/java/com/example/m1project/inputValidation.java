@@ -1,11 +1,11 @@
 package com.example.m1project;
 
 import android.app.Activity;
+// ... other imports from your original file (Handler, Looper, Log, etc.)
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,7 +32,8 @@ public class inputValidation {
     private static final String API_URL_BASE = "https://data.gov.il/api/action/datastore_search";
     private static final String RESOURCE_ID = "b7cf8f14-64a2-4b33-8d4b-edb286fdbd37";
 
-    // Constructor
+
+    // Simplified Constructor
     public inputValidation(EditText name, EditText email, EditText phone, EditText password, EditText passwordAgain, EditText city) {
         this.name = name;
         this.email = email;
@@ -41,7 +42,6 @@ public class inputValidation {
         this.passwordAgain = passwordAgain;
         this.city = city;
     }
-
 
     public interface CityValidationListener {
         void onCityValidationResult(boolean isValid, String cityInput, String message);
@@ -54,18 +54,22 @@ public class inputValidation {
                 TextUtils.isEmpty(password.getText().toString()) ||
                 TextUtils.isEmpty(phone.getText().toString()) ||
                 TextUtils.isEmpty(passwordAgain.getText().toString()) ||
-                TextUtils.isEmpty(this.city.getText().toString())) { // Use this.city
-            Toast.makeText(activity, "Not all fields are filled", Toast.LENGTH_LONG).show();
+                TextUtils.isEmpty(this.city.getText().toString())) { // City is still checked here
+            Toast.makeText(activity, "Not all required basic fields are filled", Toast.LENGTH_LONG).show();
+            // Optionally set errors on individual fields
+            if(TextUtils.isEmpty(name.getText().toString())) name.setError("Required");
+            // ... etc.
+            if(TextUtils.isEmpty(this.city.getText().toString())) city.setError("City for validation is required");
             return false;
         }
         return true;
     }
 
     boolean checkSecondPassword(Activity activity) {
-        if (password.getText().toString().equals(passwordAgain.getText().toString())) {
+        if (this.password.getText().toString().equals(this.passwordAgain.getText().toString())) {
             return true;
         } else {
-            passwordAgain.setError("Passwords do not match");
+            this.passwordAgain.setError("Passwords do not match");
             Toast.makeText(activity, "The passwords are not the same", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -99,7 +103,6 @@ public class inputValidation {
 
 
         if (TextUtils.isEmpty(phoneStr)) {
-            // Caught by checkInput
             phoneInput.setError("Phone number cannot be empty.");
             return false;
         }
@@ -113,7 +116,7 @@ public class inputValidation {
         }
     }
 
-    public boolean isValidPassword(EditText passwordInput) {
+    public boolean isValidPassword(EditText passwordInput) { // Pass the specific EditText
         String passStr = passwordInput.getText().toString();
         String errorMessage = "Password must be at least 10 characters, include at least one uppercase letter, one symbol (e.g., @, #, $), and no spaces.";
 
@@ -142,21 +145,18 @@ public class inputValidation {
     }
 
 
-    public void isValidCity(final CityValidationListener listener) {
-        final String cityToValidate = city.getText().toString().trim();
+    public void isValidCity(final CityValidationListener listener) { // Uses this.city
+        final String cityToValidate = this.city.getText().toString().trim();
 
         if (TextUtils.isEmpty(cityToValidate)) {
-            city.setError("City cannot be empty.");
+            this.city.setError("City cannot be empty.");
             if (listener != null) {
-
                 new Handler(Looper.getMainLooper()).post(() ->
                         listener.onCityValidationResult(false, cityToValidate, "City cannot be empty.")
                 );
             }
             return;
         }
-
-
         new Thread(() -> { //
             HttpURLConnection urlConnection = null;
             StringBuilder result = new StringBuilder();
@@ -207,12 +207,12 @@ public class inputValidation {
                         }
                     }
 
-                    if (cityFound) {
-                        feedbackMessage = "City '" + cityToValidate + "' is valid.";
-                    } else {
+                    if (!cityFound) {
                         feedbackMessage = "City '" + cityToValidate + "' not found in the list.";
+                    } //else {
+                        //feedbackMessage = "City '" + cityToValidate + "' not found in the list.";
 
-                    }
+                    //}
                 } else {
                     feedbackMessage = "Error fetching city data: " + responseCode;
                     Log.e(TAG, "API Error Response: " + responseCode + " " + urlConnection.getResponseMessage());
@@ -246,5 +246,4 @@ public class inputValidation {
             }
         }).start();
     }
-
 }

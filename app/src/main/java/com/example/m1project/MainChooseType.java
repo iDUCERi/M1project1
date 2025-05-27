@@ -29,4 +29,10 @@ public class MainChooseType extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    public void signAsRestaurant(View view) {
+        Intent intent = new Intent(this, MainSignInRestaurant.class);
+        startActivity(intent);
+        finish();
+    }
 }

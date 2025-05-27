@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log; // Import Log
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,11 +24,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
 public class MainSignPage extends AppCompatActivity {
 
     EditText pName, pEmail, pPhone, pPassword, pCity, pPasswordAgain;
     Button b;
     Spinner spinnerTransportType;
+    inputValidation iv;
+    FirebaseFirestore db;
+
+    private static final String TAG = "MainSignPage";
 
     @SuppressLint("SuspiciousIndentation")
     @Override
@@ -50,6 +58,8 @@ public class MainSignPage extends AppCompatActivity {
         b = findViewById(R.id.btnSign);
         spinnerTransportType = findViewById(R.id.spinnerTransportType);
 
+        iv = new inputValidation(pName, pEmail, pPhone, pPassword, pPasswordAgain, pCity);
+        db = FirebaseFirestore.getInstance();
 
         String[] transportTypesArray = getResources().getStringArray(R.array.transport_types);
 
@@ -98,7 +108,6 @@ public class MainSignPage extends AppCompatActivity {
     private boolean isTransportTypeSelected() {
         if (spinnerTransportType.getSelectedItemPosition() == 0) {
             Toast.makeText(this, "Please select a transport type", Toast.LENGTH_SHORT).show();
-
             TextView errorText = (TextView)spinnerTransportType.getSelectedView();
             if (errorText != null) {
                 errorText.setError("");
@@ -111,40 +120,59 @@ public class MainSignPage extends AppCompatActivity {
 
 
     public void SaveToFireBase(View view) {
-        String email = pEmail.getText().toString().trim();
-        String name = pName.getText().toString().trim();
-        String phone = pPhone.getText().toString().trim();
-        String password = pPassword.getText().toString().trim();
-        String city = pCity.getText().toString().trim();
-        String passwordAgain = pPasswordAgain.getText().toString().trim();
+        final String email = pEmail.getText().toString().trim();
+        final String name = pName.getText().toString().trim();
+        final String phone = pPhone.getText().toString().trim();
+        final String password = pPassword.getText().toString().trim();
+        final String city = pCity.getText().toString().trim(); // This is the user input for city
+        final String passwordAgain = pPasswordAgain.getText().toString().trim();
 
         if (!isTransportTypeSelected()) {
             return;
         }
 
-        String transportType = spinnerTransportType.getSelectedItem().toString();
-        Location currentLocation = null;
-        boolean isAvailable = false;
+        final String transportType = spinnerTransportType.getSelectedItem().toString();
+        final Location currentLocation = null;
+        final boolean isAvailable = false;
 
-        Delivery newDeliver = new Delivery(name, email, phone, password, passwordAgain, city, transportType, currentLocation, isAvailable);
-        inputValidation iv = new inputValidation(pName, pEmail, pPhone, pPassword, pPasswordAgain, pCity);
 
         if (!iv.checkInput(this) || !iv.checkSecondPassword(this) || !iv.isValidEmail(pEmail) || !iv.isValidPhone(pPhone) || !iv.isValidPassword(pPassword)) {
             return;
         }
 
+
+
+
+        db.collection(FIreBaseHelper.User_collection) // Query the single, comprehensive user collection
+                .whereEqualTo(FIreBaseHelper.UserPhone_key, phone)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            pPhone.setError("This phone number is already registered.");
+                        } else {
+                            proceedWithCityValidationAndSave(name, email, phone, password, passwordAgain, city, transportType, currentLocation, isAvailable);
+                        }
+                    } else {
+                        Log.w(TAG, "Error checking phone in users.", task.getException());
+                        Toast.makeText(MainSignPage.this, "Error checking phone availability.", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void proceedWithCityValidationAndSave(String name, String email, String phone, String password, String passwordAgain, String cityInput, String transportType, Location currentLocation, boolean isAvailable) {
         iv.isValidCity(new inputValidation.CityValidationListener() {
             @Override
-            public void onCityValidationResult(boolean isCityValid, String validatedCity, String message) {
+            public void onCityValidationResult(boolean isCityValid, String validatedCityName, String message) {
                 if (isCityValid) {
-                    newDeliver.setCity(validatedCity);
-
                     FIreBaseHelper.isAccountExist(email, MainSignPage.this, new FIreBaseHelper.AccountExistListener() {
                         @Override
                         public void onAccountExistResult(boolean exists) {
                             if (exists) {
+                                pEmail.setError("Account with this email already exists.");
                                 Toast.makeText(MainSignPage.this, "Account with this email already exists.", Toast.LENGTH_LONG).show();
                             } else {
+                                Delivery newDeliver = new Delivery(name, email, phone, password, passwordAgain, validatedCityName, transportType, currentLocation, isAvailable);
                                 FIreBaseHelper.headToFirebase(newDeliver, MainSignPage.this);
                                 Intent intent = new Intent(MainSignPage.this, MainPage.class);
                                 startActivity(intent);
@@ -154,7 +182,6 @@ public class MainSignPage extends AppCompatActivity {
                     });
                 } else {
                     pCity.setError(message);
-                    Toast.makeText(MainSignPage.this, message, Toast.LENGTH_LONG).show();
                 }
             }
         });

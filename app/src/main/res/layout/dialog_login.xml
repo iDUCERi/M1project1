@@ -16,7 +16,7 @@
         android:backgroundTint="#97B002"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColorHint="#F2F2F2"
+        style="@style/AppEditTextStyle"
         tools:ignore="HardcodedText" />
 
     <EditText
@@ -27,7 +27,7 @@
         android:backgroundTint="#97B002"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textColorHint="#F2F2F2"
+        style="@style/AppEditTextStyle"
         tools:ignore="HardcodedText" />
 
     <CheckBox
@@ -46,6 +46,8 @@
         android:id="@+id/btnDialogLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="12dp"
+
         android:backgroundTint="#97B002"
         android:layout_marginTop="16dp"
         android:text="login" />

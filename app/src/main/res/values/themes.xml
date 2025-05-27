@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.M1project" parent="Base.Theme.M1project" />
+        <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">#97B002</item>
+        <item name="android:textColorHint">#A0A0A0</item> <!-- Lighter hint for dark bg -->
+        <item name="android:textColor">#FFFFFF</item>    <!-- White text for dark bg -->
+        <item name="android:padding">12dp</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

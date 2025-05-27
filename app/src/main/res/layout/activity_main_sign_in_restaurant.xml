@@ -1,120 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0b0b0b"
-    android:orientation="vertical"
-    tools:context=".MainSignPage">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="152dp"
-        app:srcCompat="@drawable/fastan" />
-
-    <EditText
-        android:id="@+id/etName"
-        android:layout_width="352sp"
+    <LinearLayout
+        android:id="@+id/main_sign_page_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#97B002"
-        android:ems="10"
-        android:hint="Restaurant name"
-        android:inputType="text"
-        android:textColorHint="#F2F2F2" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".MainSignInRestaurant">
 
-    <EditText
-        android:id="@+id/etEmail"
-        android:layout_width="352sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:backgroundTint="#97B002"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#F2F2F2"
-        tools:ignore="TextFields" />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/fastan"
+            android:contentDescription="App Logo" />
 
-    <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="352sp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#97B002"
-        android:ems="10"
-        android:hint="@string/phone"
-        android:inputType="text"
-        android:textColorHint="#F2F2F2"
-        tools:ignore="TextFields" />
+        <EditText
+            android:id="@+id/etName"
+            style="@style/AppEditTextStyle"
+            android:hint="Restaurant name"
+            android:inputType="textCapWords"
+            tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/etPasswords"
-        android:layout_width="352sp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#97B002"
-        android:hint="Password"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColorHint="#F2F2F2"
-        tools:ignore="HardcodedText" />
+        <EditText
+            android:id="@+id/etEmail"
+            style="@style/AppEditTextStyle"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
 
-    <EditText
-        android:id="@+id/validPassword"
-        android:layout_width="352sp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#97B002"
-        android:hint="Verify password"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:textColorHint="#F2F2F2"
-        tools:ignore="HardcodedText" />
+        <EditText
+            android:id="@+id/etPhone"
+            style="@style/AppEditTextStyle"
+            android:hint="Phone"
+            android:inputType="phone"
+            tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="352sp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:text="*The city name must be in Hebrew"
-        android:textSize="10sp"
-        android:textColor="#97B002"
-        tools:ignore="HardcodedText" />
+        <EditText
+            android:id="@+id/etPasswords"
+            style="@style/AppEditTextStyle"
+            android:hint="Password"
+            android:inputType="textPassword"
+            tools:ignore="HardcodedText" />
 
-    <EditText
-        android:id="@+id/etCity"
-        android:layout_width="352sp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#97B002"
-        android:ems="10"
-        android:hint="@string/city"
-        android:inputType="text"
-        android:textColorHint="#F2F2F2" />
-
-    <!-- Added Spinner for Transport Type -->
-    <Spinner
-        android:id="@+id/spinnerTransportType"
-        android:layout_width="352sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#97B002"
-        android:entries="@array/transport_types" /> <!-- We'll define this array in strings.xml -->
+        <EditText
+            android:id="@+id/validPassword"
+            style="@style/AppEditTextStyle"
+            android:hint="Verify password"
+            android:inputType="textPassword"
+            tools:ignore="HardcodedText" />
 
 
-    <Button
-        android:id="@+id/btnSign"
-        android:layout_width="352dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="#97B002"
-        android:onClick="SaveToFireBase"
-        android:text="@string/sign" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Full Restaurant Address:"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText"/>
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/etFullAddress"
+            style="@style/AppEditTextStyle"
+            android:hint="e.g., Herzl 15, Tel Aviv"
+            android:inputType="textPostalAddress|textMultiLine"
+            android:minLines="2"
+            android:gravity="top|start"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/textViewCityLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="City - from address above:"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText"/>
+
+        <EditText
+            android:id="@+id/etCity"
+            style="@style/AppEditTextStyle"
+            android:hint="City name for validation"
+            android:inputType="text"
+            tools:ignore="HardcodedText"/>
+
+
+        <TextView
+            android:id="@+id/textViewHebrewNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:text="*City name must be in Hebrew for validation"
+            android:textColor="#97B002"
+            android:textSize="10sp"
+            tools:ignore="HardcodedText" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btnSign"
+            android:layout_width="352dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#97B002"
+            android:onClick="SaveToFireBase"
+            android:padding="12dp"
+            android:text="@string/sign"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>
