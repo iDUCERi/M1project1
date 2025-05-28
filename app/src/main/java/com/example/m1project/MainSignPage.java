@@ -35,6 +35,9 @@ public class MainSignPage extends AppCompatActivity {
     inputValidation iv;
     FirebaseFirestore db;
 
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREF_USER_EMAIL = "userEmail";
+
     private static final String TAG = "MainSignPage";
 
     @SuppressLint("SuspiciousIndentation")
@@ -160,7 +163,7 @@ public class MainSignPage extends AppCompatActivity {
                 });
     }
 
-    private void proceedWithCityValidationAndSave(String name, String email, String phone, String password, String passwordAgain, String cityInput, String transportType, Location currentLocation, boolean isAvailable) {
+    private void proceedWithCityValidationAndSave(String name, String email, String phone, String password, String passwordAgain, String city, String transportType, Location currentLocation, boolean isAvailable) {
         iv.isValidCity(new inputValidation.CityValidationListener() {
             @Override
             public void onCityValidationResult(boolean isCityValid, String validatedCityName, String message) {
@@ -172,9 +175,10 @@ public class MainSignPage extends AppCompatActivity {
                                 pEmail.setError("Account with this email already exists.");
                                 Toast.makeText(MainSignPage.this, "Account with this email already exists.", Toast.LENGTH_LONG).show();
                             } else {
-                                Delivery newDeliver = new Delivery(name, email, phone, password, passwordAgain, validatedCityName, transportType, currentLocation, isAvailable);
+                                Delivery newDeliver = new Delivery(name, email, phone, password, passwordAgain, validatedCityName, transportType, currentLocation, false);
                                 FIreBaseHelper.headToFirebase(newDeliver, MainSignPage.this);
                                 Intent intent = new Intent(MainSignPage.this, MainPage.class);
+                                intent.putExtra("USER_EMAIL", email);
                                 startActivity(intent);
                                 finish();
                             }

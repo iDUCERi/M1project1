@@ -98,12 +98,14 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
             editor.putBoolean(PREF_REMEMBER_ME, true);
             editor.putString(PREF_USER_EMAIL, email);
         } else {
+            String currentLoginEmail = email;
             editor.remove(PREF_REMEMBER_ME);
             editor.remove(PREF_USER_EMAIL);
         }
         editor.apply();
 
         Intent intent = new Intent(this, MainPage.class);
+        intent.putExtra("USER_EMAIL", email);
         startActivity(intent);
         finish();
     }

@@ -33,6 +33,9 @@ public class MainSignInRestaurant extends AppCompatActivity {
     private FirebaseFirestore db;
     private static final String TAG = "MainSignInRestaurant";
 
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String PREF_USER_EMAIL = "userEmail";
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -160,6 +163,7 @@ public class MainSignInRestaurant extends AppCompatActivity {
         Toast.makeText(this, "Sign-up successful for: " + name + "! Taking you to the main page.", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(MainSignInRestaurant.this, MainPage.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("USER_EMAIL", email);
         startActivity(intent);
         finish();
     }

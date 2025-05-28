@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="#0B0B0B"
     android:padding="16dp"
     >
@@ -13,9 +12,29 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="630dp"
         android:contentDescription="App Logo"
         app:srcCompat="@drawable/fastan" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:backgroundTint="#97B002"
+        android:layout_height="wrap_content"
+        android:text="Change status" />
+
 </LinearLayout>
 
