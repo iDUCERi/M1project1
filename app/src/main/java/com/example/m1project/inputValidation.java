@@ -206,10 +206,10 @@ public class inputValidation {
 
                     if (!cityFound) {
                         feedbackMessage = "City '" + cityToValidate + "' not found in the list.";
-                    } //else {
-                        //feedbackMessage = "City '" + cityToValidate + "' not found in the list.";
+                    }
 
-                    //}
+
+
                 } else {
                     feedbackMessage = "Error fetching city data: " + responseCode;
                     Log.e(TAG, "API Error Response: " + responseCode + " " + urlConnection.getResponseMessage());

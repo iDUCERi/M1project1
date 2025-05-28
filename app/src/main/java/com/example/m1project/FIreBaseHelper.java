@@ -3,18 +3,18 @@ package com.example.m1project;
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
-import android.location.Location; // <-- Import Location
+import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable; // <-- Import Nullable for the location parameter
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint; // <-- Import GeoPoint if you prefer to store location that way
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -36,18 +36,14 @@ public class FIreBaseHelper {
 
     public static final String TransportType_key = "Transport_type";
 
-    // Define keys for location data if they are different from what your Delivery class uses
-    // For this example, let's assume your Delivery documents will store 'latitude' and 'longitude'
-    // or a single 'locationGeoPoint' field of type GeoPoint.
-    public static final String DeliverLatitude_key = "latitude"; // Example key
-    public static final String DeliverLongitude_key = "longitude"; // Example key
-    public static final String DeliverLocationGeoPoint_key = "locationGeoPoint"; // Example key for GeoPoint
 
-    // Keep your original DeliverLocation_key if it serves a different purpose or if your Delivery class
-    // already handles a complex Location object directly (which is less common for Firestore).
-    // For simplicity with primitive types or GeoPoint in Firestore, the keys above are often used.
-    public static final String DeliverLocation_key = "Deliver_Location"; // Original, might be a custom object string
-    public static final String IsDeliverAvailable_key = "Is_Deliver_Available"; // Corrected variable name to match usage
+    public static final String DeliverLatitude_key = "latitude";
+    public static final String DeliverLongitude_key = "longitude";
+    public static final String DeliverLocationGeoPoint_key = "locationGeoPoint";
+
+
+    public static final String DeliverLocation_key = "Deliver_Location";
+    public static final String IsDeliverAvailable_key = "Is_Deliver_Available";
 
     public static FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -73,50 +69,34 @@ public class FIreBaseHelper {
     }
 
     private static Map<String, Object> prepareData2Save(Delivery deliver) {
-        Map<String, Object> deliverData = new HashMap<>(); // Renamed for clarity
+        Map<String, Object> deliverData = new HashMap<>();
         deliverData.put(FIreBaseHelper.UserCity_key, deliver.getCity());
         deliverData.put(FIreBaseHelper.UserEmail_key, deliver.getEmail());
         deliverData.put(FIreBaseHelper.UserPass_key, deliver.getPassword());
         deliverData.put(FIreBaseHelper.UserName_key, deliver.getName());
         deliverData.put(FIreBaseHelper.UserPhone_key, deliver.getPhone());
         deliverData.put(FIreBaseHelper.TransportType_key, deliver.getTransportType());
-        deliverData.put(FIreBaseHelper.IsDeliverAvailable_key, deliver.getIsAvailable()); // Corrected key usage
+        deliverData.put(FIreBaseHelper.IsDeliverAvailable_key, deliver.getIsAvailable());
 
-        // Handle Location:
-        // How you store location depends on your Delivery class and Firestore structure.
-        // Option A: Store latitude and longitude as separate fields (common)
+
         if (deliver.getLocation() != null) {
             deliverData.put(DeliverLatitude_key, deliver.getLocation().getLatitude());
             deliverData.put(DeliverLongitude_key, deliver.getLocation().getLongitude());
         } else {
-            // Decide how to handle null location during initial save
-            deliverData.put(DeliverLatitude_key, null); // Or some default
-            deliverData.put(DeliverLongitude_key, null); // Or some default
+
+            deliverData.put(DeliverLatitude_key, null);
+            deliverData.put(DeliverLongitude_key, null);
         }
-
-        // Option B: Store as a Firestore GeoPoint (recommended for geoqueries)
-        // if (deliver.getLocation() != null) {
-        //     deliverData.put(DeliverLocationGeoPoint_key, new GeoPoint(deliver.getLocation().getLatitude(), deliver.getLocation().getLongitude()));
-        // } else {
-        //     deliverData.put(DeliverLocationGeoPoint_key, null);
-        // }
-
-        // Option C: If deliver.getLocation() returns a String or complex object that Firestore can't directly map,
-        // you might need to reconsider. The original code had:
-        // deliverData.put(FIreBaseHelper.DeliverLocation_key, deliver.getLocation());
-        // This is fine if deliver.getLocation() returns something Firestore can serialize (like a String or another Map).
-        // If it's an android.location.Location object, Firestore will try to serialize it, which might not be what you want.
-        // For the sake of the setDeliveryAvailability modification, we'll assume latitude/longitude fields.
 
         return deliverData;
     }
 
 
     public static void headToFirebase(Object object, Context context) {
-        Map<String, Object> data; // No need to initialize here
+        Map<String, Object> data;
 
-        // Corrected logic for instanceof checks
-        if (object instanceof Delivery) { // Check most specific first
+
+        if (object instanceof Delivery) {
             Delivery delivery = (Delivery) object;
             data = prepareData2Save(delivery);
             db.collection(Delivery_collection).add(data)
@@ -134,7 +114,7 @@ public class FIreBaseHelper {
             db.collection(Restaurant_collection).add(data)
                     .addOnSuccessListener(documentReference -> Log.d(TAG, "Restaurant added with ID: " + documentReference.getId()))
                     .addOnFailureListener(e -> Log.w(TAG, "Error adding restaurant", e));
-        } else if (object instanceof User) { // General user last
+        } else if (object instanceof User) {
             User user = (User) object;
             data = prepareData2Save(user);
             db.collection(User_collection).add(data)
@@ -212,22 +192,20 @@ public class FIreBaseHelper {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 DocumentReference docRef = db.collection(Delivery_collection).document(document.getId());
                                 Map<String, Object> updates = new HashMap<>();
-                                updates.put(IsDeliverAvailable_key, isAvailable); // Use IsDeliverAvailable_key consistently
+                                updates.put(IsDeliverAvailable_key, isAvailable);
 
 
                                 if (location != null) {
-                                    // Option A: Store as separate latitude/longitude fields
+
                                     updates.put(DeliverLatitude_key, location.getLatitude());
                                     updates.put(DeliverLongitude_key, location.getLongitude());
 
                                 } else {
 
-                                    // updates.put(DeliverLatitude_key, null);
-                                    // updates.put(DeliverLongitude_key, null);
-                                    // updates.put(DeliverLocationGeoPoint_key, null);
+
                                 }
 
-                                docRef.update(updates) // Update with the map of changes
+                                docRef.update(updates)
                                         .addOnSuccessListener(aVoid -> {
                                             String locMsg = (location != null) ? " and location" : "";
                                             Log.d(TAG, "Delivery availability" + locMsg + " successfully updated for " + email + " to " + isAvailable);
@@ -237,7 +215,7 @@ public class FIreBaseHelper {
                                             Log.w(TAG, "Error updating delivery availability for " + email, e);
                                             if (listener != null) listener.onFailure(e);
                                         });
-                                break; // Process only the first matching document (assuming email is unique)
+                                break;
                             }
                         } else {
                             Log.w(TAG, "Error getting documents to update availability: ", task.getException());
@@ -273,7 +251,7 @@ public class FIreBaseHelper {
                                 return;
                             }
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Boolean isAvailable = document.getBoolean(IsDeliverAvailable_key); // Use IsDeliverAvailable_key
+                                Boolean isAvailable = document.getBoolean(IsDeliverAvailable_key);
                                 if (isAvailable == null) {
                                     Log.w(TAG, IsDeliverAvailable_key + " field is missing or not a boolean for email: " + email);
                                     if (listener != null) listener.onAvailabilityFetched(false);
