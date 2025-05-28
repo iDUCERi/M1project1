@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.2"
+agp = "8.10.0"
 firebaseBom = "33.7.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -13,6 +13,7 @@ firebaseFirestore = "25.1.1"
 firebaseInappmessaging = "21.0.2"
 impress = "0.0.3"
 rendering = "1.17.1"
+firebaseAuth = "23.2.1"
 
 [libraries]
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
@@ -28,7 +29,7 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 impress = { group = "com.google.ar", name = "impress", version.ref = "impress" }
 rendering = { group = "com.google.ar.sceneform", name = "rendering", version.ref = "rendering" }
-
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }

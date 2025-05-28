@@ -9,7 +9,7 @@ public class Delivery extends User{
     private boolean isAvailable;// breaktime
 
     public Delivery(String name, String gmail, String phone, String password,String passwordAgain ,String city, String transportType, Location location, boolean isAvailable) {
-            super(name, gmail, phone, password,passwordAgain,city);
+        super(name, gmail, phone, password,city,passwordAgain);
         this.transportType = transportType;
         this.location = location;
         this.isAvailable = isAvailable;

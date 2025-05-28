@@ -28,6 +28,11 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -35,7 +40,6 @@ android {
 }
 
 dependencies {
-
 
     implementation(libs.appcompat)
     implementation(platform(libs.firebase.bom))
@@ -47,7 +51,8 @@ dependencies {
     implementation(libs.firebase.inappmessaging)
     implementation(libs.impress)
     implementation(libs.rendering)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-}
+    }

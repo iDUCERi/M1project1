@@ -8,7 +8,7 @@ public class Restaurant extends User{
     //
 
     public Restaurant(String name, String gmail, String phone, String password,String passwordAgain, String city, String address) {
-        super(name, gmail, phone, password,passwordAgain, city);
+        super(name, gmail, phone, password,city, passwordAgain);
         this.address = address;
     }
 

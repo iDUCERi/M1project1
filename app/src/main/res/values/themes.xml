@@ -21,4 +21,22 @@
         <item name="android:layout_marginBottom">12dp</item>
         <item name="android:textSize">16sp</item>
     </style>
+    <!-- ... other styles ... -->
+    <style name="ProfileLabelTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">12dp</item>
+    </style>
+
+    <style name="ProfileValueEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:backgroundTint">@android:color/darker_gray
+        </item> <!-- For MaterialComponents theme -->
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

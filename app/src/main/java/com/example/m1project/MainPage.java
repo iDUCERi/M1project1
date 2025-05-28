@@ -1,46 +1,47 @@
-// In your MainPage.java
 package com.example.m1project;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.os.Bundle; // Removed unused Intent and SharedPreferences imports for this specific file
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import com.example.m1project.databinding.ActivityMainPageBinding;
 
 public class MainPage extends AppCompatActivity {
 
+    ActivityMainPageBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_page);
+        binding = ActivityMainPageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        Button logoutButton = findViewById(R.id.button3);
+        if (savedInstanceState == null) {
+            replaceFragment(new Order_Fragment());
+        }
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
 
-                Intent intent = new Intent(MainPage.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                finish();
+            if (itemId == R.id.orders_nav) {
+                replaceFragment(new Order_Fragment());
+                return true;
+            } else if (itemId == R.id.status_nav) {
+                replaceFragment(new Status_Fragment());
+                return true;
+            } else if (itemId == R.id.profile_nav) {
+                replaceFragment(new Profile_Fragment());
+                return true;
             }
+            return false;
         });
-
-
     }
 
-//    public void Disconnect(View view) {
-//        SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-//        editor.remove(PREF_REMEMBER_ME);
-//        editor.remove(PREF_USER_EMAIL);
-//        editor.apply();
-//
-//        Intent intent = new Intent(MainPage.this, MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK); // Clear back stack
-//        startActivity(intent);
-//        finish();
-//    }
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
+    }
 }
