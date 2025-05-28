@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
             return insets;
         });
 
-        newEditTextText = findViewById(R.id.newEditTextText);
-        bt = findViewById(R.id.GetLocation);
         logBtn = findViewById(R.id.LogInButton);
         imageView4 = findViewById(R.id.imageView4);
 
