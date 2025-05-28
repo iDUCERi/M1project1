@@ -1,7 +1,7 @@
 package com.example.m1project;
 
 import android.content.Intent;
-import android.content.SharedPreferences; // <<< Import SharedPreferences
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
     Button bt, logBtn;
     ImageView imageView4;
 
-    // SharedPreferences keys
+
     private static final String PREFS_NAME = "MyPrefsFile";
     private static final String PREF_REMEMBER_ME = "rememberMe";
     private static final String PREF_USER_EMAIL = "userEmail";
@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements LoginDialogFragme
             editor.putBoolean(PREF_REMEMBER_ME, true);
             editor.putString(PREF_USER_EMAIL, email);
         } else {
-            // If not remember me, clear the preferences
             editor.remove(PREF_REMEMBER_ME);
             editor.remove(PREF_USER_EMAIL);
         }

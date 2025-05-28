@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log; // Import Log
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -124,7 +124,7 @@ public class MainSignPage extends AppCompatActivity {
         final String name = pName.getText().toString().trim();
         final String phone = pPhone.getText().toString().trim();
         final String password = pPassword.getText().toString().trim();
-        final String city = pCity.getText().toString().trim(); // This is the user input for city
+        final String city = pCity.getText().toString().trim();
         final String passwordAgain = pPasswordAgain.getText().toString().trim();
 
         if (!isTransportTypeSelected()) {
@@ -143,7 +143,7 @@ public class MainSignPage extends AppCompatActivity {
 
 
 
-        db.collection(FIreBaseHelper.User_collection) // Query the single, comprehensive user collection
+        db.collection(FIreBaseHelper.User_collection)
                 .whereEqualTo(FIreBaseHelper.UserPhone_key, phone)
                 .get()
                 .addOnCompleteListener(task -> {

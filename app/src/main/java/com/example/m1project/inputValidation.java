@@ -1,7 +1,7 @@
 package com.example.m1project;
 
 import android.app.Activity;
-// ... other imports from your original file (Handler, Looper, Log, etc.)
+
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -33,7 +33,6 @@ public class inputValidation {
     private static final String RESOURCE_ID = "b7cf8f14-64a2-4b33-8d4b-edb286fdbd37";
 
 
-    // Simplified Constructor
     public inputValidation(EditText name, EditText email, EditText phone, EditText password, EditText passwordAgain, EditText city) {
         this.name = name;
         this.email = email;
@@ -54,11 +53,9 @@ public class inputValidation {
                 TextUtils.isEmpty(password.getText().toString()) ||
                 TextUtils.isEmpty(phone.getText().toString()) ||
                 TextUtils.isEmpty(passwordAgain.getText().toString()) ||
-                TextUtils.isEmpty(this.city.getText().toString())) { // City is still checked here
+                TextUtils.isEmpty(this.city.getText().toString())) {
             Toast.makeText(activity, "Not all required basic fields are filled", Toast.LENGTH_LONG).show();
-            // Optionally set errors on individual fields
             if(TextUtils.isEmpty(name.getText().toString())) name.setError("Required");
-            // ... etc.
             if(TextUtils.isEmpty(this.city.getText().toString())) city.setError("City for validation is required");
             return false;
         }
@@ -116,7 +113,7 @@ public class inputValidation {
         }
     }
 
-    public boolean isValidPassword(EditText passwordInput) { // Pass the specific EditText
+    public boolean isValidPassword(EditText passwordInput) {
         String passStr = passwordInput.getText().toString();
         String errorMessage = "Password must be at least 10 characters, include at least one uppercase letter, one symbol (e.g., @, #, $), and no spaces.";
 
@@ -145,7 +142,7 @@ public class inputValidation {
     }
 
 
-    public void isValidCity(final CityValidationListener listener) { // Uses this.city
+    public void isValidCity(final CityValidationListener listener) {
         final String cityToValidate = this.city.getText().toString().trim();
 
         if (TextUtils.isEmpty(cityToValidate)) {
@@ -157,7 +154,7 @@ public class inputValidation {
             }
             return;
         }
-        new Thread(() -> { //
+        new Thread(() -> {
             HttpURLConnection urlConnection = null;
             StringBuilder result = new StringBuilder();
             boolean cityFound = false;
@@ -216,7 +213,7 @@ public class inputValidation {
                 } else {
                     feedbackMessage = "Error fetching city data: " + responseCode;
                     Log.e(TAG, "API Error Response: " + responseCode + " " + urlConnection.getResponseMessage());
-                    // Read error stream if available
+
                     BufferedReader errorReader = new BufferedReader(new InputStreamReader(urlConnection.getErrorStream()));
                     String errorLine;
                     StringBuilder errorResult = new StringBuilder();

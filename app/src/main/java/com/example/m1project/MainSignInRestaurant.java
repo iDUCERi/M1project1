@@ -142,7 +142,7 @@ public class MainSignInRestaurant extends AppCompatActivity {
         });
     }
 
-    // Modified to accept email for saving preferences
+
     private void performSaveData(String validatedCity, String fullAddress, String emailForPrefs) {
         String name = etName.getText().toString().trim();
         String email = etEmail.getText().toString().trim();

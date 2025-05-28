@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox; // <<< Import CheckBox
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -28,11 +28,11 @@ public class LoginDialogFragment extends DialogFragment {
 
     private EditText emailInput;
     private EditText passwordInput;
-    private CheckBox rememberMeCheckbox; // <<< Add CheckBox variable
+    private CheckBox rememberMeCheckbox;
     private LoginDialogListener listener;
 
     public interface LoginDialogListener {
-        void onLoginSuccess(String email, boolean rememberMe); // <<< Modified interface
+        void onLoginSuccess(String email, boolean rememberMe);
     }
 
     public static LoginDialogFragment newInstance() {
@@ -59,7 +59,7 @@ public class LoginDialogFragment extends DialogFragment {
 
         emailInput = dialogView.findViewById(R.id.etDialogEmail);
         passwordInput = dialogView.findViewById(R.id.etDialogPassword);
-        rememberMeCheckbox = dialogView.findViewById(R.id.cbDialogRememberMe); // <<< Initialize CheckBox
+        rememberMeCheckbox = dialogView.findViewById(R.id.cbDialogRememberMe);
         Button loginButton = dialogView.findViewById(R.id.btnDialogLogin);
 
         builder.setView(dialogView)
@@ -123,8 +123,8 @@ public class LoginDialogFragment extends DialogFragment {
                             if (passwordMatch) {
                                 Toast.makeText(getContext(), "Login Successful!", Toast.LENGTH_SHORT).show();
                                 if (listener != null) {
-                                    boolean remember = rememberMeCheckbox.isChecked(); // <<< Get CheckBox state
-                                    listener.onLoginSuccess(email, remember); // <<< Pass to listener
+                                    boolean remember = rememberMeCheckbox.isChecked();
+                                    listener.onLoginSuccess(email, remember);
                                 }
                                 dialog.dismiss();
                             } else {
